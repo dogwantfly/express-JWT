@@ -40,7 +40,7 @@ const errorHandler = (err, req, res, next) => {
       err.isOperational = true;
       err.message = err.message.split(', ');
       return resErrorProd(err, res)
-    } else if (err.name === 'SyntaxError') {
+    } else if (err.name === 'SyntaxError' || err.name === 'TypeError') {
       err.statusCode = 400
       err.isOperational = true;
       err.message = '資料格式錯誤';

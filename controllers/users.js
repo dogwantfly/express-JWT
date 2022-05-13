@@ -9,6 +9,9 @@ const { generateSendJWT } = require('../utils/auth');
 
 const userController = {
   async signUp(req, res, next) {
+    if (!validator.isJSON(req.body)) {
+      return next(appError(400, "資料格式錯誤", next))
+    }
     let { email, password, confirmPassword, name } = req.body;
     if (!email || !password || !confirmPassword || !name) {
       return next(appError(400, "請輸入必填欄位：Email、密碼、暱稱", next))
@@ -42,7 +45,7 @@ const userController = {
       return next(appError(400, "Email 及 密碼為必填欄位", next))
     }
     const user = await User.findOne({ email }).select('+password');
-    console.log(user);
+    
     if (!user) {
       return next(appError(400, "帳號或密碼錯誤，請重新輸入！", next));
     }
