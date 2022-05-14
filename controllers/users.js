@@ -81,7 +81,9 @@ const userController = {
     if (!gender|| !name) {
       return next(appError(400, "請輸入必填欄位：性別、暱稱", next))
     }
-    console.log('gender:', gender)
+    if(!validator.isLength(name, { min: 2 })){
+      return next(appError(400,"暱稱至少 2 個字元以上", next));
+    }
     if (gender !== 'male' && gender !== 'female') {
       return next(appError(400, "性別欄位需為 male 或 female", next))
     }
