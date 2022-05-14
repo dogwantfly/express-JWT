@@ -1,5 +1,5 @@
 const resErrorProd = (err, res) => {
-  console.log('err:', err);
+
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,

@@ -93,7 +93,7 @@ const userController = {
       photo
     };
     const user = await User.findByIdAndUpdate(req.user.id, editContent,  {new: true});
-    console.log('user', user);
+
     handleSuccess(res, user);
   }
 }
